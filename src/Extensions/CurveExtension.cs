@@ -52,5 +52,20 @@ namespace Tuna.Revit.Extension.Extensions
             return curve.GetEndPoint(1);
         }
 
+        /// <summary>
+        /// Rotate curve by give point
+        /// </summary>
+        /// <param name="curve"></param>
+        /// <param name="angle"></param>
+        /// <param name="origin"></param>
+        /// <param name="axis"></param>
+        /// <returns></returns>
+        public static Curve RotateByPoint(this Curve curve, double angle, XYZ origin, XYZ axis = null) 
+        {
+            axis ??= XYZ.BasisZ;
+            Transform transform = Transform.CreateRotationAtPoint(axis, angle, origin);
+            return curve.CreateTransformed(transform);
+        }
+
     }
 }
